@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      style="display: flex; justify-content: space-between; align-items: center"
+    >
+      <h1>Compra de filmes</h1>
+      <div style="font-size: 24px">
+        <a href="cart.html">Carrinho:</a>
+        <strong>
+          <span id="numero-carrinho"> 0 </span>
+        </strong>
+      </div>
+    </div>
+
+    <table style="width: 100%" border>
+      <thead>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Ação</th>
+      </thead>
+      <tbody id="table-movies-body"></tbody>
+    </table>
+
+    <script>
+      console.log("HOME!");
+
+      localStorage.setItem("list_cart", "Shooooooow! Conseguimos rapidamente!");
+
+      function updateCartNumber(total) {
+        const cartNumberEL = document.getElementById("numero-carrinho");
+        cartNumberEL.textContent = total;
+      }
+
+      const cart = [];
+      const movies = [
+        {
+          id: 1,
+          name: "De volta para o futuro",
+          price: "13,50",
+        },
+        {
+          id: 2,
+          name: "Dragon ball Z",
+          price: "10,20",
+        },
+        {
+          id: 3,
+          name: "A Cabana",
+          price: "14,65",
+        },
+      ];
+
+      const tableMoviesEL = document.querySelector("#table-movies-body");
+
+      const movieElements = movies.map((item) => {
+        const tr = document.createElement("tr");
+
+        const colName = document.createElement("td");
+        colName.textContent = item.name;
+
+        const colPrice = document.createElement("td");
+        colPrice.textContent = item.price;
+
+        const colAction = document.createElement("td");
+        const buttonAction = document.createElement("button");
+        buttonAction.textContent = "Adicionar ao carrinho";
+        buttonAction.onclick = function () {
+          cart.push(item);
+          updateCartNumber(cart.length);
+          //   TODO: Fazer essa implementação para buscar lá no carrinho
+          //   updateCartStorage(cart)
+          alert("Item adicionado com sucesso");
+        };
+
+        colAction.appendChild(buttonAction);
+
+        tr.appendChild(colName);
+        tr.appendChild(colPrice);
+        tr.appendChild(colAction);
+
+        return tr;
+      });
+
+      
+      movieElements.forEach((createdTr) => {
+        tableMoviesEL.appendChild(createdTr);
+      });
+    </script>
+  </body>
+</html>

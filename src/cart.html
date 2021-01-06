@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Carrinho!</h1>
+
+    <table style="width: 100%" border>
+      <thead>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Quantidade</th>
+        <th>Ação</th>
+      </thead>
+      <tbody id="table-movies-body">
+        <tr>
+          <td>Dragon ball</td>
+          <td>23,30</td>
+          <td>2</td>
+          <td>
+            <button>-</button>
+            <button>+</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="3"></td>
+          <td>Total: 46,60</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      console.log("CART!");
+
+      const resultado = localStorage.getItem("list_cart")
+      console.log(resultado)
+    </script>
+  </body>
+</html>
