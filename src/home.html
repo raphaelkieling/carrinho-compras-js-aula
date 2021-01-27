@@ -30,35 +30,54 @@
     <script>
       console.log("HOME!");
 
-      localStorage.setItem("list_cart", "Shooooooow! Conseguimos rapidamente!");
+      // Criamos para centralizar o estado
+      const state = {
+        // Transformei o texto em objeto
+        cart: JSON.parse(localStorage.getItem("carrinho")) || [],
+        // Criei uma lista de filmes
+        movies: [
+          {
+            id: 1,
+            name: "De volta para o futuro",
+            price: "13,50",
+          },
+          {
+            id: 2,
+            name: "Dragon ball Z",
+            price: "10,20",
+          },
+          {
+            id: 3,
+            name: "A Cabana",
+            price: "14,65",
+          },
+        ],
+      };
+      
 
       function updateCartNumber(total) {
         const cartNumberEL = document.getElementById("numero-carrinho");
         cartNumberEL.textContent = total;
       }
 
-      const cart = [];
-      const movies = [
-        {
-          id: 1,
-          name: "De volta para o futuro",
-          price: "13,50",
-        },
-        {
-          id: 2,
-          name: "Dragon ball Z",
-          price: "10,20",
-        },
-        {
-          id: 3,
-          name: "A Cabana",
-          price: "14,65",
-        },
-      ];
+      updateCartNumber(state.cart.length)
+
+      function addMovieIntoCart(movie) {
+        // Adicionar mais um item n ocarrinho
+        state.cart.push(movie);
+
+        // Transforma isso pra texto STRINGGGGGG
+        const transformToJson = JSON.stringify(state.cart);
+
+        // Colocar essa tring vinculada chave
+        localStorage.setItem("carrinho", transformToJson);
+        
+        updateCartNumber(state.cart.length);
+      }
 
       const tableMoviesEL = document.querySelector("#table-movies-body");
 
-      const movieElements = movies.map((item) => {
+      const movieElements = state.movies.map((item) => {
         const tr = document.createElement("tr");
 
         const colName = document.createElement("td");
@@ -70,12 +89,10 @@
         const colAction = document.createElement("td");
         const buttonAction = document.createElement("button");
         buttonAction.textContent = "Adicionar ao carrinho";
+
         buttonAction.onclick = function () {
-          cart.push(item);
-          updateCartNumber(cart.length);
-          //   TODO: Fazer essa implementação para buscar lá no carrinho
-          //   updateCartStorage(cart)
-          alert("Item adicionado com sucesso");
+          addMovieIntoCart(item);
+          console.log(state);
         };
 
         colAction.appendChild(buttonAction);
@@ -87,7 +104,6 @@
         return tr;
       });
 
-      
       movieElements.forEach((createdTr) => {
         tableMoviesEL.appendChild(createdTr);
       });

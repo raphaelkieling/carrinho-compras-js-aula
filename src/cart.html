@@ -25,18 +25,14 @@
             <button>+</button>
           </td>
         </tr>
-
-        <tr>
-          <td colspan="3"></td>
-          <td>Total: 46,60</td>
-        </tr>
       </tbody>
     </table>
 
     <script>
       console.log("CART!");
 
-      const resultado = localStorage.getItem("list_cart")
+      const resultado = JSON.parse(localStorage.getItem("carrinho"));
+
       console.log(resultado)
     </script>
   </body>
